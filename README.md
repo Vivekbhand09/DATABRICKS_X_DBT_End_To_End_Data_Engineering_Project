@@ -256,6 +256,7 @@ dbutils.notebook.exit(f"SUCCESS: {entity}")
 
 **Result:** re-running with no new files adds nothing (checkpoint knows what was processed); updated records simply appear as additional rows – de-duplication is Silver's job.
 
+![Gold Layer Tables](Utils/bronze.png)
 ---
 
 ### Step 3 – Control Table & Batch Tracking
@@ -310,6 +311,9 @@ class transformations:
 
 All tables share: dedup on `last_updated_timestamp`, a `process_timestamp` audit column and the merge condition `src.last_updated_timestamp > trg.last_updated_timestamp`.
 
+![Gold Layer Tables](Utils/silver.png)
+
+![Gold Layer Tables](Utils/job.png)
 ---
 
 ### Step 5 – Silver Trips (dbt Incremental Model)
@@ -347,6 +351,7 @@ WHERE last_updated_timestamp > (
 - **`generate_schema_name` macro** – returns the custom schema verbatim (instead of `<target>_<custom>`), so models and snapshots land in the exact `silver` and `gold` schemas.
 - **`sources.yml`** – declares `source_bronze` (`trips`) and `source_silver` (`customers`, `payments`, `locations`, `vehicles`, `drivers`, `trips`) for lineage and a single place to change names.
 
+![Gold Layer Tables](Utils/model.png)
 ---
 
 ### Step 6 – Gold Layer (dbt Snapshots, SCD Type 2)
@@ -397,6 +402,7 @@ WHERE customer_id = 'C1'
 
 > **Silver (SCD1) → Gold (SCD2):** Silver stores the *latest* state; Gold snapshots detect changes flowing out of Silver and preserve *history*. The same `last_updated_timestamp` column drives dedup, merge and snapshot change detection.
 
+![Gold Layer Tables](Utils/snapshot.png)
 ---
 
 ## 🔄 End-to-End Data Flow
