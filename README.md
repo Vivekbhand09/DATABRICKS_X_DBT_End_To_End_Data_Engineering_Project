@@ -433,22 +433,6 @@ source_silver.trips     --> [snapshot] DimTrips
 
 ---
 
-## ▶️ How to Run
-
-**Prerequisites:** a Databricks workspace with Unity Catalog, a dbt Cloud account connected to Databricks (`dbt-databricks` adapter) and this repository linked to dbt Cloud (project subdirectory: `DBT_CLOUD`).
-
-```text
-1. Create the catalog `pysparkdbt` and the schemas: source, bronze, silver, gold, control_tables
-2. Create the volume `source_data` and the six entity sub-folders; upload the CSV files
-3. Import the notebooks into Databricks (bronze_ingestion, load_to_bronze, silver_transformation)
-4. Run bronze_ingestion            → loads all entities into Bronze
-5. Run silver_transformation       → builds Silver + writes the control-table record
-6. In dbt Cloud:
-      dbt run --select trips       → incremental silver.trips
-      dbt snapshot                 → Gold dimensions + FactTrips (SCD Type 2)
-   (or simply: dbt build)
-```
-
 | dbt command | Effect |
 |---|---|
 | `dbt run` | Builds models → `silver.trips` |
@@ -488,26 +472,6 @@ source_silver.trips     --> [snapshot] DimTrips
 - Applying **dimensional modelling** (star schema, fact vs dimension, grain, surrogate keys).
 - Combining **PySpark and dbt** in one pipeline, and understanding when each tool fits best.
 - Limitations of each pattern: watermark filters miss late-arriving older records; snapshots capture state only when they run, so job frequency sets history granularity.
-
----
-
-## 🚀 Future Improvements
-
-- Add dbt **tests** (`unique`, `not_null`, `relationships`) and source freshness checks.
-- Replace `trigger(once=True)` with `trigger(availableNow=True)`.
-- Orchestrate the whole flow with **Databricks Workflows** and schedule dbt Cloud jobs.
-- Add data-quality checks / quarantine handling for bad records in Silver.
-- Build BI dashboards on the Gold layer.
-- Add CI (dbt Cloud CI jobs) on pull requests.
-
----
-
-## 👤 Author
-
-**Your Name**
-- 💼 LinkedIn: [your-linkedin-url](https://www.linkedin.com/)
-- 🐙 GitHub: [your-github-username](https://github.com/)
-- 📧 Email: your.email@example.com
 
 ---
 
