@@ -18,31 +18,6 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-
-
----
-
-## 📑 Table of Contents
-
-1. [Project Overview](#-project-overview)
-2. [Architecture](#-architecture)
-3. [Tech Stack](#-tech-stack)
-4. [Repository Structure](#-repository-structure)
-5. [Concepts in Short (Theory)](#-concepts-in-short-theory)
-6. [What I Built (Step by Step)](#-what-i-built-step-by-step)
-   - [Step 1 – Environment Setup](#step-1--environment-setup-unity-catalog)
-   - [Step 2 – Bronze Layer](#step-2--bronze-layer-streaming-ingestion)
-   - [Step 3 – Control Table](#step-3--control-table--batch-tracking)
-   - [Step 4 – Silver Layer (PySpark)](#step-4--silver-layer-pyspark)
-   - [Step 5 – Silver Trips (dbt)](#step-5--silver-trips-dbt-incremental-model)
-   - [Step 6 – Gold Layer (dbt Snapshots)](#step-6--gold-layer-dbt-snapshots-scd-type-2)
-7. [End-to-End Data Flow](#-end-to-end-data-flow)
-8. [How to Run](#-how-to-run)
-9. [Advantages of This Design](#-advantages-of-this-design)
-10. [What I Learned](#-what-i-learned)
-11. [Future Improvements](#-future-improvements)
-12. [Author](#-author)
-
 ---
 
 ## 📌 Project Overview
